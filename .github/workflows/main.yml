@@ -3,7 +3,7 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main  # deploy when pushing to main branch
+      - main
 
 jobs:
   deploy:
@@ -20,13 +20,16 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           source: "./index.html"
-          target: "/var/www/html/"
+          target: "/home/${{ secrets.EC2_USERNAME }}/deploy/"
 
-      - name: Restart web server (optional)
+      - name: Move files to web root and restart server
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            sudo mkdir -p /var/www/html
+            sudo mv /home/${USER}/deploy/* /var/www/html/
+            sudo chown -R www-data:www-data /var/www/html || true
             sudo systemctl restart nginx || sudo systemctl restart httpd
