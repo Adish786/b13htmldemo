@@ -1,1 +1,44 @@
-<h1>I am Deploying GitHub Action Working Task</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EC2 Deployment Test</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #f8fafc;
+      text-align: center;
+      padding-top: 10%;
+    }
+    h1 {
+      color: #38bdf8;
+      font-size: 2.5rem;
+    }
+    p {
+      font-size: 1.2rem;
+      margin-top: 10px;
+    }
+    .status {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #1e293b;
+      border-radius: 8px;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <h1>🚀 EC2 Deployment Successful!</h1>
+  <p>This page was deployed automatically via <strong>GitHub Actions</strong>.</p>
+  <div class="status">
+    <p><strong>Status:</strong> Online ✅</p>
+    <p><strong>Time:</strong> <span id="time"></span></p>
+  </div>
+
+  <script>
+    document.getElementById('time').textContent = new Date().toLocaleString();
+  </script>
+</body>
+</html>
